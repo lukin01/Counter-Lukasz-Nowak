@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Counter.Views.CounterPage"
+             Title="CounterPage">
+    <VerticalStackLayout>
+        <Border 
+            
+            Stroke="Black" 
+            StrokeThickness="1" 
+            Padding="10" 
+            WidthRequest="180"
+            HeightRequest="150">
+
+            <Grid RowDefinitions="Auto, *" ColumnDefinitions="*, *" RowSpacing="0" ColumnSpacing="5">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    x:Name="counterValueDisplay"
+                    WidthRequest="150"
+                    HeightRequest="60"
+                    HorizontalTextAlignment="Center"
+                    Text="0"
+                    FontSize="20" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="-"
+                    WidthRequest="70"
+                    HeightRequest="50"
+                    Margin="5"
+                    FontSize="20"
+                    Clicked="CounterDecrease"/>
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="+"
+                    WidthRequest="70"
+                    HeightRequest="50"
+                    Margin="5"
+                    FontSize="20"
+                    Clicked="CounterIncrease"/>
+
+            </Grid>
+            
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>
