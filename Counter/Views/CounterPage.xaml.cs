@@ -1,37 +1,55 @@
-      namespace Counter.Views;
+namespace Counter.Views;
+using System.Collections.ObjectModel;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 
 public partial class CounterPage : ContentPage
 {
-	public CounterPage()
+    public ObservableCollection<CounterModel> Counters { get; set; } = new();
+
+    private readonly CounterStorage _storage = new();
+
+    public CounterPage()
 	{
 		InitializeComponent();
-	}
 
-    private int currentCounterValue = 0;
+        foreach (var counter in _storage.Load())
+        {
+            Counters.Add(counter);
+        }
+
+        BindingContext = this;
+    }
 
     private void CounterIncrease(object sender, EventArgs e)
     {
-        if (int.TryParse(counterValueDisplay.Text, out int value))
+        if (sender is Button button && button.BindingContext is CounterModel counter)
         {
-            currentCounterValue = value + 1;
+            counter.Increase();
+            _storage.Save(Counters);
         }
-        else
-        {
-            currentCounterValue = 1;
-        }
-        counterValueDisplay.Text = currentCounterValue.ToString();
     }
 
     private void CounterDecrease(object sender, EventArgs e)
     {
-        if (int.TryParse(counterValueDisplay.Text, out int value))
+        if (sender is Button button && button.BindingContext is CounterModel counter)
         {
-            currentCounterValue = value - 1;
+            counter.Decrease();
+            _storage.Save(Counters);
         }
-        else
+    }
+
+    private void AddCounter(object sender, EventArgs e)
+    {
+        string name = CounterNameEntry.Text?.Trim() ?? "";
+
+        if (name == "")
         {
-            currentCounterValue = 0;
+            return;
         }
-        counterValueDisplay.Text = currentCounterValue.ToString();
+
+        Counters.Add(new CounterModel() { Name = name, CounterValue = 0 });
+        CounterNameEntry.Text = "";
+        _storage.Save(Counters);
     }
 }

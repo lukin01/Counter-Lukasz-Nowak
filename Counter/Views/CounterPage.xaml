@@ -3,47 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Counter.Views.CounterPage"
              Title="CounterPage">
-    <VerticalStackLayout>
-        <Border 
-            
-            Stroke="Black" 
-            StrokeThickness="1" 
-            Padding="10" 
-            WidthRequest="180"
-            HeightRequest="150">
+    <Grid RowDefinitions="Auto, *">
 
-            <Grid RowDefinitions="Auto, *" ColumnDefinitions="*, *" RowSpacing="0" ColumnSpacing="5">
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    x:Name="counterValueDisplay"
-                    WidthRequest="150"
-                    HeightRequest="60"
-                    HorizontalTextAlignment="Center"
-                    Text="0"
-                    FontSize="20" />
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Text="-"
-                    WidthRequest="70"
-                    HeightRequest="50"
-                    Margin="5"
-                    FontSize="20"
-                    Clicked="CounterDecrease"/>
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Text="+"
-                    WidthRequest="70"
-                    HeightRequest="50"
-                    Margin="5"
-                    FontSize="20"
-                    Clicked="CounterIncrease"/>
+        <HorizontalStackLayout Grid.Row="0" Padding="10" Spacing="10">
+            <Entry
+                x:Name="CounterNameEntry"
+                Placeholder="Nazwa licznika"
+                WidthRequest="200" />
+            <Button
+                Text="Dodaj"
+                Clicked="AddCounter" />
+        </HorizontalStackLayout>
 
-            </Grid>
-            
-        </Border>
-    </VerticalStackLayout>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Counters}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                        Stroke="Black" 
+                        StrokeThickness="1" 
+                        Padding="10"
+                        Margin="10"
+                        WidthRequest="180">
+
+                        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, *" RowSpacing="5" ColumnSpacing="5">
+                            <Label
+                                Grid.Row="0"
+                                Grid.ColumnSpan="2"
+                                Text="{Binding Name}"
+                                HorizontalTextAlignment="Center"
+                                FontSize="20" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Text="{Binding CounterValue}"
+                                HorizontalTextAlignment="Center"
+                                FontSize="30" />
+
+                            <Button
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Text="-"
+                                FontSize="20"
+                                Clicked="CounterDecrease"/>
+                            <Button
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="+"
+                                FontSize="20"
+                                Clicked="CounterIncrease"/>
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
