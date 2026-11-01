@@ -42,14 +42,18 @@ public partial class CounterPage : ContentPage
     private void AddCounter(object sender, EventArgs e)
     {
         string name = CounterNameEntry.Text?.Trim() ?? "";
+        
 
         if (name == "")
         {
             return;
         }
 
-        Counters.Add(new CounterModel() { Name = name, CounterValue = 0 });
+        int.TryParse(CounterValueEntry.Text, out int value);
+
+        Counters.Add(new CounterModel() { Name = name, CounterValue = value});
         CounterNameEntry.Text = "";
+        CounterValueEntry.Text = "";
         _storage.Save(Counters);
     }
 }
