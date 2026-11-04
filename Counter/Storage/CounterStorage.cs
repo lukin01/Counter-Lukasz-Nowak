@@ -15,20 +15,20 @@ namespace Counter.Storage
 
         public void Save(IEnumerable<CounterModel> counters)
         {
-            string json = JsonSerializer.Serialize(counters);
-            File.WriteAllText(_filepath, json);
+            try
+            {
+                string json = JsonSerializer.Serialize(counters);
+                File.WriteAllText(_filepath, json);
+            }
+            catch (Exception)
+            {
+
+            }
         }
-
-
         public List<CounterModel> Load()
         {
             try
             {
-                if (!File.Exists(_filepath))
-                {
-                    return new List<CounterModel>();
-                }
-
                 string json = File.ReadAllText(_filepath);
                 return JsonSerializer.Deserialize<List<CounterModel>>(json) ?? new List<CounterModel>();
             }
