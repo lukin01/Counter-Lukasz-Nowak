@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Counter.Models;
 
-namespace Counter.Views
+namespace Counter.Storage
 {
     internal class CounterStorage
     {

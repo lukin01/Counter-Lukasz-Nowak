@@ -1,4 +1,7 @@
 namespace Counter.Views;
+
+using Counter.Models;
+using Counter.Storage;
 using System.Collections.ObjectModel;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;

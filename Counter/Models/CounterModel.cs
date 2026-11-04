@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Counter.Views
+namespace Counter.Models
 {
     public class CounterModel : INotifyPropertyChanged
     {
