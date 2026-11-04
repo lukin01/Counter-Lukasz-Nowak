@@ -44,7 +44,7 @@ public partial class CounterPage : ContentPage
 
     private void AddCounter(object sender, EventArgs e)
     {
-        string name = CounterNameEntry.Text?.Trim() ?? "";string name = CounterNameEntry.Text?.Trim() ?? "";
+        string name = CounterNameEntry.Text?.Trim() ?? "";
         
 
         if (name == "")
